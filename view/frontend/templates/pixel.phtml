@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * @category  Crankycyclops
+ * @package   Crankycyclops_RedditPixel
+ * @author    James Colannino
+ * @copyright Copyright (c) 2018 James Colannino
+ * @license   https://www.gnu.org/licenses/gpl-3.0.en.html GNU General Public License v3
+ */
+
+/**
+ * Reddit Pixel Code
+ *
+ * @var $block \Crankycyclops\RedditPixel\Block\Pixel
+ */
+
+$data = $block->getPixelConfig();
+
+?>
+
+<!-- Reddit Conversion Pixel -->
+<script>
+
+!function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','<?= $block->escapeHtml($data['pixel_id']) ?>');rdt('track', 'PageVisit');
+
+
+<?php
+
+switch ($block->getAction()) {
+
+	case 'catalog_product_view':
+
+		?>
+
+		rdt('track', 'ViewContent');
+
+		// Fire AddToCart when the "Add to cart" button is clicked
+		let addToCartBtn = document.getElementById('product-addtocart-button');
+		if (addToCartBtn) {
+			addToCartBtn.addEventListener('click', function() {
+				rdt('track', 'AddToCart');
+			});
+		}
+
+		<?php
+
+		break;
+
+	case 'catalogsearch_result_index':
+	case 'catalogsearch_advanced_result':
+
+		?> rdt('track', 'Search'); <?php
+		break;
+
+	case 'customer_account_create':
+
+		?> rdt('track', 'SignUp'); <?php
+		break;
+
+	// TODO: Facebook has the InitiateCheckout event, but there's nothing
+	// comparable for the Reddit pixel. Is AddToCart okay here?
+	case 'checkout_index_index':
+	case 'onepagecheckout_index_index':
+	case 'onestepcheckout_index_index':
+	case 'opc_index_index':
+
+		?> rdt('track', 'AddToCart'); <?php
+		break;
+
+	case 'checkout_onepage_success':
+	case 'onepagecheckout_index_success':
+
+		?> rdt('track', 'Purchase'); <?php
+		break;
+
+	case 'wishlist_index_index':
+
+		?> rdt('track', 'AddToWishlist'); <?php
+		break;
+}
+
+?>
+
+<!-- End Reddit Conversion Pixel -->
+</script>
+

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Crankycyclops
+ * @package   Crankycyclops_RedditPixel
+ * @author    James Colannino
+ * @copyright Copyright (c) 2018 James Colannino
+ * @license   https://www.gnu.org/licenses/gpl-3.0.en.html GNU General Public License v3
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<crankycyclops_redditpixel>
+			<general>
+				<enabled>0</enabled>
+				<pixel_id>ab_123456</pixel_id>
+			</general>
+		</crankycyclops_redditpixel>
+	</default>
+</config>
+

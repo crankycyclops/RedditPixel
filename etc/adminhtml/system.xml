@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Crankycyclops
+ * @package   Crankycyclops_RedditPixel
+ * @author    James Colannino
+ * @copyright Copyright (c) 2018 James Colannino
+ * @license   https://www.gnu.org/licenses/gpl-3.0.en.html GNU General Public License v3
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+
+	<system>
+
+		<tab id="crankycyclops_redditpixel" translate="label" sortOrder="1">
+			<label>Reddit Conversion Pixel</label>
+		</tab>
+
+		<section id="crankycyclops_redditpixel_general" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+
+			<label>General</label>
+			<tab>crankycyclops_redditpixel</tab>
+			<resource>Crankycyclops_RedditPixel::config_system</resource>
+
+			<group id="general" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General</label>
+				<field id="enabled" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enabled</label>
+					<comment>Enables or disables the Reddit conversion pixel.</comment>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="pixel_id" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Reddit Pixel ID</label>
+					<comment>Your Reddit Pixel ID.</comment>
+					<validate>required-entry</validate>
+					<backend_model>Crankycyclops\RedditPixel\Model\Config\RedditPixelId</backend_model>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+			</group>
+
+		</section>
+
+	</system>
+
+</config>
+
